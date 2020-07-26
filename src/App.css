@@ -1,7 +1,3 @@
-body{
-  font-family: 'Roboto Slab', serif;
-}
-
 .App {
   text-align: center;
 }
@@ -39,4 +35,11 @@ body{
   to {
     transform: rotate(360deg);
   }
+}
+
+/*signup/signin forms*/
+.signupin-frm{
+  margin-top: 100px;
+  border-radius: 15px;
+  background-color: #f7f7f7;
 }
