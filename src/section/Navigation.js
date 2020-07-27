@@ -20,6 +20,7 @@ class Navigation extends Component {
                   {url: '/to-rent', name: 'To Rent' },
                   ];
     const linksAccount = [
+                  {url: '/my-account', name: 'My Account' },
                   {url: '/join', name: 'Join' },
                   {url: '/signin', name: 'Sign In' },
                   ];

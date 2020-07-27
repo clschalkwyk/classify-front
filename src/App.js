@@ -7,6 +7,7 @@ import Forsale from './page/Forsale';
 import Signup from './page/Signup';
 import Signin from './page/Signin';
 import Footer from './section/Footer';
+import MyAccount from './page/MyAccount';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <Navigation/>
       <div className='container'>
       <Switch>
+        <Route path='/my-account'>
+          <MyAccount/>
+        </Route>
         <Route path='/for-sale'>
           <Forsale/>
         </Route>
