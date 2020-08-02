@@ -117,9 +117,10 @@ function MyAds() {
   return (
       <section>
         <form>
+          {propTitle && <h5 style={{textTransform: "capitalize"}}>{propTitle}</h5>}
           <div className="form-row">
             <div className="form-group col-md-12">
-              <label>Property Description {propTitle && <span style={{textTransform: "capitalize"}}>: {propTitle}</span>}</label>
+              <label>Property Description </label>
               <textarea name="description" id="description" className="form-control" rows={5}></textarea>
             </div>
           </div>
@@ -171,6 +172,7 @@ function MyAds() {
             })}
           </div>
           <hr/>
+          <small>Select only applicable options.</small>
           <div className="row propstats">
             {stats.Has.map(stat => {
               const lbl = stat.replace('_', ' ');
