@@ -53,7 +53,7 @@
   font-family: Arial;
 }
 
-.propstats input[type=text]{
+.propstats input[type=text], .propstats input[type=number], .propstats select{
   font-size: 12px;
   font-family: 'Arial', serif;
 }

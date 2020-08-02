@@ -34,8 +34,8 @@ function MyAds() {
       'postcode': '',
       'city': '',
       'province': '',
-      'country': '',
-    },
+      'country': 'ZA',
+    }
   };
 
   const stats = {
@@ -71,53 +71,53 @@ function MyAds() {
   };
 
   const lists = {
-    "propertyType": ["house","apartment","townhouse","plot","farm","commercial_building","industrial"],
-    "advertType": ["for_sale", "to_rent"]
+    'propertyType': ['house', 'apartment', 'townhouse', 'plot', 'farm', 'commercial_building', 'industrial'],
+    'advertType': ['for_sale', 'to_rent'],
   };
 
   const typeOptionList = (typeList) => {
-      return typeList.map(lst => {
-        return (
-            <option value={lst} key={lst}>{lst.replace('_',' ')}</option>
-        )
-      });
+    return typeList.map(lst => {
+      return (
+          <option value={lst} key={lst}>{lst.replace('_', ' ')}</option>
+      );
+    });
   };
   const [propertyType, setPropertyType] = useState('');
   const [propTitle, setProptitle] = useState('');
   let adTitle = '';
 
   const recalcTitle = () => {
-    if(propertyType !== ''){
+    if (propertyType !== '') {
       const bedroomCount = document.getElementById('stat.count.bedrooms').value;
-      let adTitle=[];
-      if(bedroomCount > 0){
-        adTitle.push(`${bedroomCount} Bedroom`)
+      let adTitle = [];
+      if (bedroomCount > 0) {
+        adTitle.push(`${bedroomCount} Bedroom`);
       }
-      adTitle.push(propertyType)
+      adTitle.push(propertyType);
 
-      setProptitle(adTitle.join(" "))
+      setProptitle(adTitle.join(' '));
     }
 
-  }
+  };
   useEffect(() => {
-    if(propertyType !== ''){
+    if (propertyType !== '') {
       const bedroomCount = document.getElementById('stat.count.bedrooms').value;
       let adTitle = [];
 
-      if(bedroomCount > 0){
-        adTitle.push(`${bedroomCount} Bedroom`)
+      if (bedroomCount > 0) {
+        adTitle.push(`${bedroomCount} Bedroom`);
       }
-      adTitle.push(propertyType)
+      adTitle.push(propertyType);
 
-      setProptitle(adTitle.join(" "));
+      setProptitle(adTitle.join(' '));
     }
 
-  },[propertyType])
+  }, [propertyType]);
 
   return (
       <section>
-        <form>
-          {propTitle && <h5 style={{textTransform: "capitalize"}}>{propTitle}</h5>}
+        <form className="propstats">
+          {propTitle && <h5 style={{textTransform: 'capitalize'}}>{propTitle}</h5>}
           <div className="form-row">
             <div className="form-group col-md-12">
               <label>Property Description </label>
@@ -125,7 +125,7 @@ function MyAds() {
             </div>
           </div>
           <hr/>
-          <div className="form-row justify-content-center">
+          <div className="form-row justify-content-center ">
             <div className="form-group col-md-2">
               <label>Advert Type</label>
               <select className="proptype form-control">
@@ -153,7 +153,7 @@ function MyAds() {
 
           </div>
           <hr/>
-          <div className="row propstats">
+          <div className="row ">
             {stats.Count.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
@@ -164,7 +164,7 @@ function MyAds() {
                              placeholder={lbl}
                              id={`stat.count.${stat}`}
                              data-stat="count" onChange={(e) => {
-                               recalcTitle();
+                        recalcTitle();
                       }}/>
                     </div>
                   </div>
@@ -173,21 +173,22 @@ function MyAds() {
           </div>
           <hr/>
           <small>Select only applicable options.</small>
-          <div className="row propstats">
+          <div className="row ">
             {stats.Has.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
                   <div className="col-md-2" key={stat}>
                     <div className="form-group form-check-inline">
-                      <input type="checkbox" className="form-check-input" id={`stat.has.${stat}`} data-stat="has"/>
-                      <label className="form-check-label">{lbl}</label>
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" id={`stat.has.${stat}`} data-stat="has"/>
+                        {lbl}</label>
                     </div>
                   </div>
               );
             })}
           </div>
           <hr/>
-          <div className="row propstats">
+          <div className="row ">
             {stats.Size.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
@@ -203,6 +204,54 @@ function MyAds() {
               );
             })}
           </div>
+          <hr/>
+          <div className="form-row ">
+              <div className="form-group col-md-6 input-group-sm">
+                <label htmlFor="buildingName">Building Name</label>
+                <input type="text" name="buildingName" id="buildingName" className="form-control" maxLength="60"/>
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="complexName">Complex Name</label>
+                <input type="text" name="complexName" id="complexName" className="form-control" maxLength="60"/>
+              </div>
+          </div>
+          <div className="form-row ">
+              <div className="form-group col-md-4">
+                <label htmlFor="street1">Street</label>
+                <input type="text" name="street1" id="street1" className="form-control" maxLength="60"/>
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="street2">Street 2</label>
+                <input type="text" name="street2" id="street2" className="form-control" maxLength="60"/>
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="suburb">Suburb</label>
+                <input type="text" name="suburb" id="suburb" className="form-control" maxLength="60"/>
+              </div>
+          </div>
+          <div className="form-row ">
+              <div className="form-group col-md-3">
+                <label htmlFor="city">City</label>
+                <input type="text" name="city" id="city" className="form-control" maxLength="60"/>
+              </div>
+              <div className="form-group col-md-2">
+                <label htmlFor="postcode">Postcode</label>
+                <input type="number" name="postcode" id="postcode" className="form-control" maxLength="10"/>
+              </div>
+              <div className="form-group col-md-4">
+                <label htmlFor="province">Province</label>
+                <input type="text" name="province" id="province" className="form-control" maxLength="60"/>
+              </div>
+              <div className="form-group col-md-3">
+                <label htmlFor="country">Country</label>
+                <select name="country" id="country" className="form-control" defaultValue={advert.fullAddress.country}>
+                  <option value="">Select...</option>
+                  <option value="ZA">South Africa</option>
+                </select>
+              </div>
+          </div>
+          <hr/>
+          <button className="btn btn-primary form-control">Post Advert</button>
         </form>
       </section>
   );
