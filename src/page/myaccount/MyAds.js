@@ -71,7 +71,7 @@ function MyAds() {
   };
 
   const lists = {
-    "propertyType": ["house","apartment","townhouse","plot","farm","commercial","industrial"],
+    "propertyType": ["house","apartment","townhouse","plot","farm","commercial_building","industrial"],
     "advertType": ["for_sale", "to_rent"]
   };
 
@@ -89,18 +89,29 @@ function MyAds() {
   const recalcTitle = () => {
     if(propertyType !== ''){
       const bedroomCount = document.getElementById('stat.count.bedrooms').value;
-      let adTitle;
+      let adTitle=[];
       if(bedroomCount > 0){
-        adTitle =  `${bedroomCount} Bedroom ${propertyType}`;
-      }else{
-        adTitle =  `${propertyType}`;
+        adTitle.push(`${bedroomCount} Bedroom`)
       }
-      setProptitle(adTitle)
+      adTitle.push(propertyType)
+
+      setProptitle(adTitle.join(" "))
     }
 
   }
   useEffect(() => {
-    recalcTitle();
+    if(propertyType !== ''){
+      const bedroomCount = document.getElementById('stat.count.bedrooms').value;
+      let adTitle = [];
+
+      if(bedroomCount > 0){
+        adTitle.push(`${bedroomCount} Bedroom`)
+      }
+      adTitle.push(propertyType)
+
+      setProptitle(adTitle.join(" "));
+    }
+
   },[propertyType])
 
   return (
@@ -145,7 +156,7 @@ function MyAds() {
             {stats.Count.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
-                  <div className="col-md-2">
+                  <div className="col-md-2" key={stat}>
                     <div className="form-group input-group-sm">
                       <label>{lbl}</label>
                       <input type="number" className="form-control "
@@ -164,7 +175,7 @@ function MyAds() {
             {stats.Has.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
-                  <div className="col-md-2">
+                  <div className="col-md-2" key={stat}>
                     <div className="form-group form-check-inline">
                       <input type="checkbox" className="form-check-input" id={`stat.has.${stat}`} data-stat="has"/>
                       <label className="form-check-label">{lbl}</label>
@@ -178,7 +189,7 @@ function MyAds() {
             {stats.Size.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
-                  <div className="col-md-3">
+                  <div className="col-md-3" key={stat}>
                     <label>{lbl}</label>
                     <div className="input-group input-group-sm">
                       <input type="number" className="form-control " placeholder={lbl} id={`stat.size.${stat}`} data-stat="size"/>
