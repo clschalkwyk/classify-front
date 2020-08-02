@@ -7,6 +7,7 @@ function Signin(){
   const [password, setPassword] = useState('');
   const [cookies, setCookie] = useCookies(['token']);
 
+  console.log(cookies);
   async function doSignup(e) {
     e.preventDefault();
 

@@ -1,8 +1,21 @@
 import React from 'react';
-
+import AdvertCard from './components/AdvertCard';
 function Home(){
   return (
-      <h1>Home Page</h1>
+      <section>
+        <div className="row">
+          <AdvertCard/>
+          <AdvertCard/>
+          <AdvertCard/>
+          <AdvertCard/>
+          <AdvertCard/>
+          <AdvertCard/>
+
+        </div>
+
+      </section>
+
+
   )
 }
 

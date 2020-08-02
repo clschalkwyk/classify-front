@@ -1,0 +1,31 @@
+{
+  "Count": [
+    "bedrooms",
+    "bathrooms",
+    "lounges",
+    "kitchen",
+    "garage",
+    "parking_bays"
+  ],
+  "Has": [
+    "pool",
+    "patio",
+    "storage",
+    "laundry",
+    "scullery",
+    "guest_toilet",
+    "entrance_hall",
+    "alarm",
+    "access_gate",
+    "electric_fencing",
+    "intercom",
+    "guard_house",
+    "pet_friendly",
+    "sea_view",
+    "flatlet"
+  ],
+  "Size": [
+    "erf_size",
+    "floor_area"
+  ]
+}

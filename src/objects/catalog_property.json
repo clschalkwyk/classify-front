@@ -1,0 +1,35 @@
+{
+  "id": "",
+  "type": "property",
+  "title": "",
+  "description": "",
+  "images": "",
+  "createdAt": "",
+  "expiredAt": "",
+  "published": "",
+  "stats": {
+    "Count": {},
+    "Has": {},
+    "Size": {}
+  },
+  "ratesTaxes": "",
+  "askingPrice": "",
+  "rentalAmount": "",
+  "propertyType": "",
+  "geoLocation": {
+    "lat": "",
+    "lon": ""
+  },
+  "user_id": "",
+  "fullAddress": {
+    "buildingName": "",
+    "complexName": "",
+    "street1": "",
+    "street2": "",
+    "suburb": "",
+    "postcode": "",
+    "city": "",
+    "province": "",
+    "country": ""
+  }
+}

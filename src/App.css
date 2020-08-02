@@ -41,5 +41,23 @@
 .signupin-frm{
   margin-top: 100px;
   border-radius: 15px;
-  background-color: #f7f7f7;
+}
+.aboutme-frm{
+  border-radius: 15px;
+  padding:10px;
+}
+
+.propstats label{
+  text-transform: capitalize;
+  font-size: 12px;
+  font-family: Arial;
+}
+
+.propstats input[type=text]{
+  font-size: 12px;
+  font-family: 'Arial', serif;
+}
+
+.proptype{
+  text-transform: capitalize;
 }
