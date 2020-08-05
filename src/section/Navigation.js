@@ -25,7 +25,7 @@ class Navigation extends Component {
                   {url: '/signin', name: 'Sign In' },
                   ];
     return (
-      <nav className='navbar navbar-expand-lg navbar-light' style={{backgroundColor: '#feffff'}}>
+      <nav className='navbar navbar-expand-lg navbar-dark' style={{backgroundColor: '#146382'}}>
         <div className="container-fluid">
           <a href="/" className="navbar-brand">Classify <small>{"{beta}"}</small></a>
           <div className="collapse navbar-collapse " id='navbarNav'>

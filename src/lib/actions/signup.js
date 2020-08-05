@@ -1,7 +1,7 @@
 import endpoint from './endpoint';
 
 async function Signup(params) {
-  const res = await endpoint.post('/users/signup', params);
+  const res = await endpoint.post('/auth/signup', params);
   return res.data;
 }
 

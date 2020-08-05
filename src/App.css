@@ -47,6 +47,10 @@
   padding:10px;
 }
 
+.propstats textarea{
+  font-size: 12px;
+}
+
 .propstats label{
   text-transform: capitalize;
   font-size: 12px;
