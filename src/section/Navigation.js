@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {hasToken} from '../lib/token';
+import {validToken} from '../lib/myaccount/account';
 
 class Navigation extends Component {
 
@@ -19,11 +21,18 @@ class Navigation extends Component {
                   {url: '/for-sale', name: 'For Sale' },
                   {url: '/to-rent', name: 'To Rent' },
                   ];
+
     const linksAccount = [
-                  {url: '/my-account', name: 'My Account' },
                   {url: '/join', name: 'Join' },
                   {url: '/signin', name: 'Sign In' },
                   ];
+
+    if(hasToken() && validToken()){
+      linksAccount.push(
+          {url: '/my-account', name: 'My Account' }
+      )
+    }
+
     return (
       <nav className='navbar navbar-expand-lg navbar-dark' style={{backgroundColor: '#146382'}}>
         <div className="container-fluid">

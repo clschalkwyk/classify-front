@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import genPayload from '../../lib/myaccount/genpayload';
 import CreateAd from '../../lib/actions/createAd';
 
-function MyAds() {
+function NewAd() {
 
   const advert = {
     'id': '',
@@ -321,4 +321,4 @@ function MyAds() {
   );
 }
 
-export default MyAds;
+export default NewAd;

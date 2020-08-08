@@ -8,19 +8,24 @@ import Signup from './page/Signup';
 import Signin from './page/Signin';
 import Footer from './section/Footer';
 import MyAccount from './page/MyAccount';
+import {hasToken} from './lib/token';
 
-function App() {
+function  App() {
+
   return (
     <Router>
       <Navigation/>
       <div className='container'>
       <Switch>
-        <Route path='/my-account'>
-          <MyAccount/>
-        </Route>
-        <Route path='/for-sale'>
-          <Forsale/>
-        </Route>
+        {
+          hasToken() &&
+          ( <Route path='/my-account'>
+              <MyAccount/>
+            </Route>)
+        }
+         <Route path='/for-sale'>
+            <Forsale/>
+          </Route>
         <Route path='/join'>
           <Signup/>
         </Route>

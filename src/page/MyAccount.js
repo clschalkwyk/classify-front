@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import AboutMe from './myaccount/AboutMe';
-import MyAds from './myaccount/MyAds';
+import NewAd from './myaccount/NewAd';
 
 function MyAccount(){
 
@@ -13,7 +13,7 @@ function MyAccount(){
           <div className='col-md-2'>
             <nav className="nav flex-column">
               <a className="nav-link" href="/my-account/about-me">About Me</a>
-              <a className="nav-link" href="/my-account/my-ads">My Ads</a>
+              <a className="nav-link" href="/my-account/new-ad">New Advert</a>
             </nav>
           </div>
           <div className='col-md-10'>
@@ -22,8 +22,8 @@ function MyAccount(){
                 <Route path='/my-account/about-me'>
                   <AboutMe/>
                 </Route>
-                <Route path='/my-account/my-ads'>
-                  <MyAds/>
+                <Route path='/my-account/new-ad'>
+                  <NewAd/>
                 </Route>
                 <Route path='/my-account/'>
                   <AboutMe/>

@@ -8,7 +8,7 @@ function  InputCheckbox(props) {
         <div className="col-sm-6">
           <div className="form-check">
           <input type="checkbox" className="form-check-input"
-                 id={id} name={name} value={value} checked={value}
+                 id={id} name={name} value={1} checked={value}
                  onChange={event => change(event.target.checked)}
           />
           </div>
