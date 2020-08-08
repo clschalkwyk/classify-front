@@ -8,6 +8,7 @@ function Signin(){
   const [cookies, setCookie] = useCookies(['token']);
 
   console.log(cookies);
+
   async function doSignup(e) {
     e.preventDefault();
 
@@ -17,10 +18,10 @@ function Signin(){
     };
     const res = await signinAction(params);
 
-    if(res.status === 201){
+    if(res.status === 200){
       const {access_token} = res.data;
       if(access_token !== undefined){
-        setCookie('token', access_token, {path:'/'});
+        setCookie('token', access_token, {path:'/', domain:"localhost"});
         window.location.href = '/';
       }
     }

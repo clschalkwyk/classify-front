@@ -16,13 +16,6 @@ const userData = {
   "authId": "1",
   "newsletter": false
 };
-
-  //console.log("Profile", await myAccount.getProfile());
-
-
-  //let  profile;
-  const [profile, setProfile] = useState('');
-
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
