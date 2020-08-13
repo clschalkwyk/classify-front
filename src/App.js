@@ -15,7 +15,7 @@ function  App() {
   return (
     <Router>
       <Navigation/>
-      <div className='container'>
+      <div className='container' style={{padding: "10px"}}>
       <Switch>
         {
           hasToken() &&

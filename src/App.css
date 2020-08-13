@@ -54,7 +54,7 @@
 .propstats label{
   text-transform: capitalize;
   font-size: 12px;
-  font-family: Arial;
+  font-family: 'Arial', serif;
 }
 
 .propstats input[type=text], .propstats input[type=number], .propstats select{
@@ -64,4 +64,32 @@
 
 .proptype{
   text-transform: capitalize;
+}
+
+.ad-box img{
+  box-shadow: 0 2px 4px rgba(0,0,0,.22);
+}
+
+.info-box{
+  background: #319ae5;
+  padding: 10px;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,.22);
+}
+
+.info-box h2{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  text-transform: capitalize;
+  font-weight: 500;
+  font-style: normal;
+  margin-top: 0px !important;
+  color: #ffffff;
+  margin-bottom: 0px;
+  padding-left: 10px;
+}
+
+.info-box i{
+  font-size: 18px;
+  margin-left:5px;
 }

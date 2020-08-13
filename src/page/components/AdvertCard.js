@@ -1,17 +1,58 @@
 import React from 'react';
 
-function AdvertCard(props){
-  return (
-      <div className="card m-2 flex-fill" style={{width: '18rem'}}>
-        <img src='http://lorempixel.com/400/200/city/' className="card-img-top" alt="..." />
-        <div className="card-body">
-          <h5 className="card-title" style={{fontSize:'14px'}}>Sunningdale, Cape Town</h5>
-          <p className="card-text" style={{fontSize:'14px'}}>Some quick example text to build on the
-            card title and make up the bulk of the card's content.</p>
+function AdvertCard(props) {
 
+  const {item} = props;
+
+  const getStat = (st) => {
+    return (item.stat.count.filter((it) => { return it.attrib === st})).map((i) => {return i.val}).pop()
+  };
+  const beds = getStat('bedrooms');
+  const baths = getStat('bathrooms');
+  const garage = getStat('garages');
+  const {askingPrice} = item;
+
+
+  return (
+      <div className="col-md-4 col-xs-6 col-lg-4 ad-box" style={{marginTop: '10px'}} >
+        <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom" />
+        <div className="info-box">
+          <div className="row">
+              <div className="col-xs-12">
+                <h2>{item.title}</h2>
+              </div>
+          </div>
+          <div className="row">
+            {
+              (beds &&
+                  <div className="col-xs-2">
+                    <h2>{beds}<i className="fa fa-bed"/></h2>
+                  </div>
+              )
+            }
+            {
+              (baths &&
+                  <div className="col-xs-2">
+                    <h2>{baths}<i className="fa fa-bath"/></h2>
+                  </div>
+              )
+            }
+            {
+              (garage &&
+                  <div className="col-xs-2">
+                    <h2>{garage}<i className="fa fa-car"/></h2>
+                  </div>
+              )
+            }
+            <div className="col">
+              <div className="col-xs-2 float-right">
+                <h2>R {new Intl.NumberFormat('en-ZA', {maximumSignificantDigits: 3}).format(askingPrice)}</h2>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-  )
+  );
 }
 
 export default AdvertCard;

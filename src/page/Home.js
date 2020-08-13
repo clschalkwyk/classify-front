@@ -6,28 +6,28 @@ import {useCookies} from 'react-cookie';
 function Home(){
 
   const [cookies, setCookie] = useCookies(['token']);
-  console.log(cookies);
 
-  const [homeAds, setHomeAds] = useState([]);
+  const [provinceAds, setProvinceAds] = useState([]);
+  const [appFilters, setAppFilters] = useState({});
 
   useEffect(() =>{
     (async () => {
-      const ads = await esPoint.get('/browse');
-      setHomeAds(ads?.data);
-      console.log(ads.data);
+      const adsProvince = await esPoint.get('/browse?latest=province&v=Western-Cape&c=3');
+      setProvinceAds(adsProvince?.data);
+
+      const filters = await esPoint.get('/filters');
+
+      setAppFilters(filters);
+
     })()
   },[]);
 
+  const adRowProvince = provinceAds.map((item) => { return ( <AdvertCard item={item}/>) });
+  console.log(appFilters.data)
   return (
       <section>
         <div className="row">
-          <AdvertCard/>
-          <AdvertCard/>
-          <AdvertCard/>
-          <AdvertCard/>
-          <AdvertCard/>
-          <AdvertCard/>
-
+          {adRowProvince}
         </div>
 
       </section>
