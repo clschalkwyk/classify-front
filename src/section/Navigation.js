@@ -17,7 +17,6 @@ class Navigation extends Component {
   render() {
     const linksNav = [
                   {url: '/', name: 'Home' },
-                  {url: '/jobs', name: 'Jobs' },
                   {url: '/for-sale', name: 'For Sale' },
                   {url: '/to-rent', name: 'To Rent' },
                   ];
@@ -34,7 +33,7 @@ class Navigation extends Component {
     }
 
     return (
-      <nav className='navbar navbar-expand-lg navbar-dark' style={{backgroundColor: '#146382'}}>
+      <nav className='navbar navbar-expand-lg navbar-light' style={{backgroundColor: '#70befa'}}>
         <div className="container-fluid">
           <a href="/" className="navbar-brand">Classify <small>{"{beta}"}</small></a>
           <div className="collapse navbar-collapse " id='navbarNav'>

@@ -2,3 +2,11 @@ body{
     font-family: 'Roboto Slab', serif;
     font-weight: 400;
 }
+
+.navbar-light .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #000000;
+}

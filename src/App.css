@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #356dde;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -93,3 +93,13 @@
   font-size: 18px;
   margin-left:5px;
 }
+
+.home-ads {
+  padding:8px;
+}
+.home-ads .banner h3 a {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+

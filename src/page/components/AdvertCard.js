@@ -5,7 +5,13 @@ function AdvertCard(props) {
   const {item} = props;
 
   const getStat = (st) => {
-    return (item.stat.count.filter((it) => { return it.attrib === st})).map((i) => {return i.val}).pop()
+    if(item.stat?.count) {
+      return (item.stat.count.filter((it) => {
+        return it.attrib === st
+      })).map((i) => {
+        return i.val
+      }).pop()
+    }
   };
   const beds = getStat('bedrooms');
   const baths = getStat('bathrooms');

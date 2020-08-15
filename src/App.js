@@ -9,6 +9,7 @@ import Signin from './page/Signin';
 import Footer from './section/Footer';
 import MyAccount from './page/MyAccount';
 import {hasToken} from './lib/token';
+import Province from './page/property/Province';
 
 function  App() {
 
@@ -31,6 +32,9 @@ function  App() {
         </Route>
         <Route path='/signin'>
           <Signin/>
+        </Route>
+        <Route path='/property/province/:province'>
+          <Province />
         </Route>
         <Route path='/'>
           <Home/>
