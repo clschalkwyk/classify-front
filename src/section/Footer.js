@@ -4,7 +4,12 @@ import React from 'react';
 
 function Footer() {
   return (
-      <h2>Footer</h2>
+
+  <footer className="footer mt-auto py-3">
+    <div className="container">
+      <span className="text-muted"> <copy></copy>Classify.co.za 2020</span>
+    </div>
+  </footer>
   );
 }
 
