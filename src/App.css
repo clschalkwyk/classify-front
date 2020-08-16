@@ -102,4 +102,10 @@
   font-weight: bold;
 }
 
+.clickable{
+  cursor: pointer;
+}
 
+.clickable a {
+  text-decoration: none;
+}

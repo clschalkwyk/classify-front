@@ -20,7 +20,8 @@ function AdvertCard(props) {
 
 
   return (
-      <div className="col-md-4 col-xs-6 col-lg-4 ad-box" style={{marginTop: '10px'}} >
+      <div className="col-sm-4 ad-box clickable" style={{marginTop: '10px'}} >
+        <a href={`/property/view/${item.pk}`}>
         <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom" />
         <div className="info-box">
           <div className="row">
@@ -57,6 +58,7 @@ function AdvertCard(props) {
             </div>
           </div>
         </div>
+        </a>
       </div>
   );
 }
