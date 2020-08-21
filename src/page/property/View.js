@@ -5,6 +5,7 @@ import AdvertPromoCard from '../components/AdvertPromoCard';
 import esPoint from '../../lib/actions/espoint';
 import {useCookies} from 'react-cookie';
 import getStat, {statName} from '../../lib/stat';
+import ContactForm from './ContactForm';
 
 function View() {
   let {urlkey} = useParams();
@@ -16,9 +17,7 @@ function View() {
 
   useEffect(() => {
     (async () => {
-
       setAdv((await esPoint.get(`/getPropAd?id=${urlkey}`)).data);
-
     })();
   }, []);
 
@@ -36,28 +35,25 @@ function View() {
               <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom"/>
             </div>
           </div>
-          <div className='row'>
+          <div className='row adstats'>
             <div className="col-sm-12">
               <h5>
                 R {new Intl.NumberFormat('en-ZA', {maximumSignificantDigits: 3}).format(adv.askingPrice)}<br/>
-
                 {
                   statBedrooms &&
                   <>
-                  <span className='badge badge-pill badge-info'>   {statBedrooms} <i className="fa fa-bed"/></span>
+                  <span className='badge badge-secondary'>   {statBedrooms} <i className="fa fa-bed"/></span>
                   </>
                 }
-
                 {statBathrooms &&
                   <>
-                   <span className='badge badge-pill badge-info'> {statBathrooms} <i className="fa fa-bath"/> </span>
+                   <span className='badge badge-secondary'> {statBathrooms} <i className="fa fa-bath"/> </span>
                   </>
                 }
-
                 {
                   statGarages &&
                   <>
-                    <span className='badge badge-pill badge-info'> {statGarages} <i className="fa fa-car"/> </span>
+                    <span className='badge badge-secondary'> {statGarages} <i className="fa fa-car"/> </span>
                   </>
 
                 }
@@ -65,7 +61,7 @@ function View() {
               </h5>
             </div>
           </div>
-          <div className='row'>
+          <div className='row adpage'>
             <div className='col-sm-7' style={{borderTop:"1px solid #000000"}}>
               <span dangerouslySetInnerHTML={{__html: adv.description}}></span>
             </div>
@@ -80,20 +76,19 @@ function View() {
                   <li>City : {adv.address?.city}</li>
                   <li>Suburb : {adv.address?.suburb}</li>
                   <li>&nbsp;</li>
-                  {adv.stat?.count?.map((i) => <li>{i.val} {i.attrib.replace('_', ' ')} </li>)}
+                  {adv.stat?.count?.map((i,v) => <li key={v}>{i.val} {i.attrib.replace('_', ' ')} </li>)}
                   <li>&nbsp;</li>
-                  {adv.stat?.size?.map((i) => <li>{i.attrib.replace('_', ' ')} {i.val} <sup>2</sup>m</li>)}
+                  {adv.stat?.size?.map((i,v) => <li key={v}>{i.attrib.replace('_', ' ')} {i.val} <sup>2</sup>m</li>)}
                   <li>&nbsp;</li>
-                  {adv.stat?.has?.map((i) => <li>{i.attrib.replace('_', ' ')} {i.val} <i className='fa fa-check'/></li>)}
+                  {adv.stat?.has?.map((i,v) => <li key={v}>{i.attrib.replace('_', ' ')} {i.val} <i className='fa fa-check'/></li>)}
                 </ul>
                 </div>
             </div>
           </div>
 
-          <div className='row'>
-            <button className='btn-danger btn badge-pill'>sign in to contact advertiser</button>
-            [contact form]
-          </div>
+
+          <ContactForm />
+
         </>
         }
 

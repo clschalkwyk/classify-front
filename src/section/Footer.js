@@ -7,7 +7,7 @@ function Footer() {
 
   <footer className="footer mt-auto py-3">
     <div className="container">
-      <span className="text-muted"> <copy></copy>Classify.co.za 2020</span>
+      <span className="text-muted">Classify.co.za 2020</span>
     </div>
   </footer>
   );

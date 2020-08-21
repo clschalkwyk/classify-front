@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
     <meta
-      name="description"
-      content="Classify classifieds web portal for jobs, property and stuff."
+            name="description"
+            content="Classify, property for-sale and to-rent."
     />
     <script src="https://use.fontawesome.com/73ea0c076d.js"></script>
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
     <title>Classify {beta}</title>
-  </head>
-  <body style="margin: 0; padding: 0" class="d-flex flex-column h-100">
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+</head>
+<body style="margin: 0; padding: 0" class="d-flex flex-column h-100">
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+<script src="https://www.google.com/recaptcha/api.js?render=6Lfs8sEZAAAAAB_3KQTAg-hrZRiIMEovZVAjwfyJ"></script>
+<div id="submitter"></div>
+<script>
+  function submitcontactform(e) {
+    e.preventDefault();
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6Lfs8sEZAAAAAB_3KQTAg-hrZRiIMEovZVAjwfyJ', {action: 'submit'}).then(function(token) {
+        // Add your logic to submit to your backend server here.
+        console.log(token);
+        const elems = document.getElementsByClassName('cnt-frm');
+        console.log(elems);
+        let ctnFrm = {};
+        for (var i = 0; i < elems.length; i++) {
+          if (elems[i].getAttribute('type') === 'checkbox') {
+            ctnFrm[elems[i].getAttribute('id')] = elems[i].checked;
+          } else {
+            ctnFrm[elems[i].getAttribute('id')] = elems[i].value;
+          }
+        }
+        window.submitter(ctnFrm);
+      });
+    });
+  }
+</script>
+</body>
 </html>
