@@ -3,12 +3,11 @@ import {useParams} from 'react-router-dom';
 import AdvertCard from '../components/AdvertCard';
 import AdvertPromoCard from '../components/AdvertPromoCard';
 import esPoint from '../../lib/actions/espoint';
-import {useCookies} from 'react-cookie';
+
 
 function Province() {
   let {province} = useParams();
 
-  const [cookies, setCookie] = useCookies(['token']);
   const [provList, setProvList] = useState([]);
   const [promoAds, setPromoAds] = useState([]);
 
@@ -20,7 +19,7 @@ function Province() {
       setPromoAds((await esPoint.get(`/promo-province?province=${province}`)).data)
 
     })();
-  }, []);
+  }, [province]);
 
   return (
       <>

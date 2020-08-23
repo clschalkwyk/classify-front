@@ -1,14 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import AdvertCard from './components/AdvertCard';
 import esPoint from '../lib/actions/espoint';
-import {useCookies} from 'react-cookie';
 
 function Home() {
-  const [cookies, setCookie] = useCookies(['token']);
-  const [provinceAds, setProvinceAds] = useState([]);
-  const [appFilters, setAppFilters] = useState({});
   const [provList, setProvList] = useState([]);
-  let filters;
 
   useEffect(() => {
     (async () => {

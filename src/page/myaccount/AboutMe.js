@@ -7,15 +7,6 @@ import {getProfile} from '../../lib/myaccount/account';
 
 function AboutMe() {
 
-const userData = {
-  "firstname": "Wikus",
-  "lastname": "Schalkwyk",
-  "email" : "asdasdsad",
-  "createdAt": "2020-01-01 00:00:00",
-  "updatedAt": "2020-01-01 00:00:00",
-  "authId": "1",
-  "newsletter": false
-};
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');

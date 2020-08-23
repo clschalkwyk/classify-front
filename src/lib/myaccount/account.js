@@ -1,5 +1,5 @@
 import axiosApi from '../actions/endpoint';
-import {hasToken, getToken} from '../token';
+import {hasToken} from '../token';
 
 export async function getProfile(){
   if(hasToken()) {

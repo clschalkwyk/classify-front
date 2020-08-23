@@ -100,8 +100,6 @@ function NewAd() {
   const [propTitle, setProptitle] = useState('');
   const [advertType, setAdvertType] = useState('');
 
-  let adTitle = '';
-
   const recalcTitle = () => {
     if (propertyType !== '') {
       const bedroomCount = document.getElementById('stat.count.bedrooms').value;

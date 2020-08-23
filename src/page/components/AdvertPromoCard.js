@@ -21,7 +21,7 @@ function AdvertPromoCard(props) {
   return (
       <div className=" clickable col-md-6 col-lg-6 col-xs-12">
         <a href={`/property/view/${item.pk}`}>
-          <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom"/>
+          <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom" alt="Pomo Advert"/>
           <div className="info-box">
             <div className="row">
               <div className="col-xs-12">

@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {hasToken, getToken} from '../token';
+//import {hasToken, getToken} from '../token';
 
 let esPoint;
 // if(hasToken()){

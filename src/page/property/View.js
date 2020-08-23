@@ -1,27 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import AdvertCard from '../components/AdvertCard';
-import AdvertPromoCard from '../components/AdvertPromoCard';
 import esPoint from '../../lib/actions/espoint';
-import {useCookies} from 'react-cookie';
-import getStat, {statName} from '../../lib/stat';
+import getStat from '../../lib/stat';
 import ContactForm from './ContactForm';
 
 function View() {
   let {urlkey} = useParams();
   //let {province} = useParams();
-
-
-  const [cookies, setCookie] = useCookies(['token']);
   const [adv, setAdv] = useState({});
 
   useEffect(() => {
     (async () => {
       setAdv((await esPoint.get(`/getPropAd?id=${urlkey}`)).data);
     })();
-  }, []);
+  }, [urlkey]);
 
-  console.log(adv);
+
   const statGarages = getStat(adv,'garages');
   const statBedrooms = getStat(adv,'bedrooms');
   const statBathrooms = getStat(adv,'bathrooms');
@@ -32,7 +26,7 @@ function View() {
           <div className='row'>
             <div className='col-sm-12'>
               <h3>{adv.title}</h3>
-              <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom"/>
+              <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom" alt={adv.title}/>
             </div>
           </div>
           <div className='row adstats'>
@@ -87,7 +81,7 @@ function View() {
           </div>
 
 
-          <ContactForm />
+          <ContactForm id={adv.pk} />
 
         </>
         }
