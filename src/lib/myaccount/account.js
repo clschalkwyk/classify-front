@@ -9,6 +9,14 @@ export async function getProfile(){
   return {};
 }
 
+export async function updateProfile(param){
+  if(hasToken()){
+    const result = await axiosApi.post('/user/update',param);
+    return result;
+  }
+  return {};
+}
+
 export async function validToken() {
   const res = await axiosApi.get('/auth/profile');
 

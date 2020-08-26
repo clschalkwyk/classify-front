@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './ContactForm.scss';
 import SendMessage from '../../lib/actions/sendMessage';
 
 function ContactForm(props) {
@@ -93,11 +94,10 @@ function ContactForm(props) {
     return showForm ? (
         <>
             <div className='row justify-content-center touchbanner'>
-              <a href="#" onClick={(e) => {
+              <button type='button' className='btn btn-link' onClick={(e) => {
                 e.preventDefault();
                 setShowGetInTouch(!showGetInTouch)}
-              }>Click here to get in touch</a>
-
+              }>Click here to get in touch</button>
             </div>
             {showGetInTouch && contactForm}
         </>

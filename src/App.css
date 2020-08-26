@@ -37,11 +37,6 @@
   }
 }
 
-/*signup/signin forms*/
-.signupin-frm{
-  margin-top: 100px;
-  border-radius: 15px;
-}
 .aboutme-frm{
   border-radius: 15px;
   padding:10px;
@@ -71,7 +66,7 @@
 }
 
 .info-box{
-  background: #319ae5;
+  background: #054a7f;
   padding: 10px;
   color: #ffffff;
   box-shadow: 0 2px 4px rgba(0,0,0,.22);
@@ -113,61 +108,16 @@
 .adpage h5{
   font-size: 14px;
   font-weight: bold;
-  font-family: 'Hind', sans-serif;
 }
 
-.contactForm{
-  border: 1px solid #07889b;
-  color: #000000;
-  padding:10px;
-}
-
-.contactForm input{
-  font-size: 12px;
-}
-
-.contactForm button{
-  color:#07889b;
-  background-color: white;
-  border: 1px solid #07889b;
-}
-
-.contactForm button:hover{
-  color:#ffffff;
-  background-color: #07889b;
-  border: 1px solid #07889b;
-}
-
-.contactForm textarea{
-  font-size: 12px;
-}
-
-.touchbanner{
-  font-size: 14px;
-  padding:5px;
-  background-color: #07889b;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-.touchbanner a{
-  font-size: 14px;
-
-  background-color: #07889b;
-  color: #ffffff;
-}
 
 .adstats .badge{
-  background-color: #07889b;
+  background-color: #054a7f;
   font-size: 16px;
   margin-right: 5px;
 }
 
-.contactForm input[type=checkbox]{
-  /* Double-sized Checkboxes */
-  -ms-transform: scale(1.5); /* IE */
-  -moz-transform: scale(1.5); /* FF */
-  -webkit-transform: scale(1.5); /* Safari and Chrome */
-  -o-transform: scale(1.5); /* Opera */
-  transform: scale(1.5);
-  padding: 5px;
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.8);
 }

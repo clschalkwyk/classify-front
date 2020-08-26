@@ -33,9 +33,7 @@ function Home() {
 
   return (<>
         {adRows}
-
         </>
-
   )
 }
 

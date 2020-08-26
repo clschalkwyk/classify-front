@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './Signup.css';
 import signupAction from '../lib/actions/signup';
 
 function Signup(){
@@ -20,7 +21,7 @@ function Signup(){
     const [confirmpassword, setConfirmpassword] = useState('');
 
     return (
-        <section className='p-4 d-flex justify-content-center border signupin-frm'>
+        <div className='row p-4 d-flex justify-content-center signupin-frm'>
           <form onSubmit={(e) => doSignup(e)} className='col-md-4'>
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email address</label>
@@ -35,10 +36,10 @@ function Signup(){
               <label htmlFor="confirmpassword">Confirm Password</label>
               <input type="password" className="form-control"  id="confirmpassword" onChange={(e) => setConfirmpassword(e.target.value)}/>
             </div>
-
             <button type="submit" className="btn btn-primary form-control">Join Now!</button>
           </form>
-        </section>
+        </div>
+
     );
 
 }

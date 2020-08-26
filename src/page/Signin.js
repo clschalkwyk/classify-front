@@ -28,7 +28,7 @@ function Signin(){
   }
 
   return (
-      <section className='p-4 d-flex justify-content-center border signupin-frm'>
+      <section className='p-4 d-flex justify-content-center signupin-frm'>
         <form className='col-md-4' onSubmit={(e) => doSignup(e)}>
           <div className="form-outline mb-4">
             <label className="form-label" htmlFor="email">Email address</label>

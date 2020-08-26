@@ -33,7 +33,7 @@ class Navigation extends Component {
     }
 
     return (
-      <nav className='navbar navbar-expand-lg navbar-light' style={{backgroundColor: '#70befa'}}>
+      <nav className='navbar navbar-expand-lg navbar-dark' style={{backgroundColor: '#054a7f'}}>
         <div className="container-fluid">
           <a href="/" className="navbar-brand">Classify <small>{"{beta}"}</small></a>
           <div className="collapse navbar-collapse " id='navbarNav'>
