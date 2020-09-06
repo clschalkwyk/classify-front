@@ -3,11 +3,19 @@ import {useParams} from 'react-router-dom';
 import esPoint from '../../lib/actions/espoint';
 import getStat from '../../lib/stat';
 import ContactForm from './ContactForm';
+import GoogleMapReact from 'google-map-react';
+
+const MapMarker = ({text}) => <div className='pin'>{text}</div>;
 
 function View() {
+  const MAP_KEY ='AIzaSyAc_llDV6vAELqGORE0uH5D11UFUNMTKOU';
+
+
   let {urlkey} = useParams();
   //let {province} = useParams();
   const [adv, setAdv] = useState({});
+  const [center, setCenter] = useState({lat: -33.9188, lng: 18.4233});
+  const [zoom, setZoom] = useState(13);
 
   useEffect(() => {
     (async () => {
@@ -78,6 +86,16 @@ function View() {
                 </div>
             </div>
           </div>
+          <div style={{height: '50vh', width: '100%'}}>
+            <GoogleMapReact
+                bootstrapURLKeys={{key: MAP_KEY}}
+                defaultCenter={center}
+                defaultZoom={zoom}
+            >
+              <MapMarker lat={-33.91} lng={18.42} text=""></MapMarker>
+            </GoogleMapReact>
+          </div>
+          <hr/>
           <ContactForm id={adv.pk} />
         </>
         }

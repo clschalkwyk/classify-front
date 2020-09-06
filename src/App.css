@@ -121,3 +121,25 @@
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.8);
 }
+
+.pin {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 50% 0;
+  background: #e90080;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 20%;
+  top: 50%;
+  margin: -20px 0 0 -20px;
+}
+
+.pin:after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin: 5px 0 0 6px;
+  background: #e6e6e6;
+  position: absolute;
+  border-radius: 50%;
+}

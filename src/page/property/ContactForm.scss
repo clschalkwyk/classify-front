@@ -1,0 +1,60 @@
+@import './src/css/colors';
+
+.contactForm {
+  border: 1px solid $classify-blue;
+  color: #000000;
+  padding: 10px;
+}
+
+.contactForm input {
+  font-size: 12px;
+}
+
+.contactForm button {
+  color: $classify-blue;
+  background-color: white;
+  border: 1px solid $classify-blue;
+}
+
+.contactForm button:hover {
+  color: #ffffff;
+  background-color: $classify-blue;
+  border: 1px solid $classify-blue;
+}
+
+.contactForm textarea {
+  font-size: 12px;
+}
+
+.contactForm input[type=checkbox] {
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 5px;
+}
+
+.touchbanner {
+  font-size: 14px;
+  padding: 5px;
+  background-color: $classify-blue;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.touchbanner a {
+  font-size: 14px;
+
+  background-color: $classify-blue;
+  color: #ffffff;
+}
+
+.touchbanner button {
+  color: #ffffff;
+}
+
+.touchbanner button:hover {
+  color: #d9d9d9;
+}

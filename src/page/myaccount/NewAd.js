@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import genPayload from '../../lib/myaccount/genpayload';
 import CreateAd from '../../lib/actions/createAd';
+import {v4 as uuid4} from 'uuid';
+import uploadFile from '../../lib/actions/uploadFile';
 
 function NewAd() {
 
@@ -83,7 +85,7 @@ function NewAd() {
       'Limpopo',
       'Mpumalanga',
       'North-West',
-      'Western Cape'
+      'Western Cape',
     ],
   };
 
@@ -99,6 +101,20 @@ function NewAd() {
   const [province, setProvince] = useState('');
   const [propTitle, setProptitle] = useState('');
   const [advertType, setAdvertType] = useState('');
+  const [tmpid, setTmpid] = useState('');
+  const [gallery, setGallery] = useState([
+    {url: 'https://picsum.photos/seed/picsum/300/200'},
+  ]);
+
+  useEffect(() => {
+    if (!localStorage.getItem('tmpId')) {
+      localStorage.setItem('tmpId', uuid4());
+    }
+
+    setTmpid(localStorage.getItem('tmpId'));
+
+  }, []);
+  //setTmpid(localStorage.getItem('tmpId'));
 
   const recalcTitle = () => {
     if (propertyType !== '') {
@@ -148,14 +164,12 @@ function NewAd() {
       if (province !== '') {
         adTitle.push(`, ${province}`);
       }
-
       setProptitle(adTitle.join(' '));
     }
 
   }, [propertyType, city, province, advertType]);
 
-
-   async function sendIt (event) {
+  async function sendIt(event) {
     event.preventDefault();
 
     let pload = genPayload();
@@ -171,45 +185,51 @@ function NewAd() {
         <form className="propstats" onSubmit={(e) => {
           sendIt(e);
         }}>
+          <input type="hidden" id="tmpId" name="tmpId" value={tmpid}/>
           <input type="hidden" id="type" name="type" value="property"/>
           {propTitle && <h5 style={{textTransform: 'capitalize'}}>{propTitle}</h5>}
+
           <div className="form-row">
             <div className="form-group col-md-12">
               <label>Property Description </label>
-              <textarea name="description" id="description" className="form-control" rows={5} />
+              <textarea name="description" id="description" className="form-control" rows={5}/>
             </div>
           </div>
           <hr/>
+
+
           <div className="form-row justify-content-center ">
-            <div className="form-group col-md-2">
+            <div className="form-group col-md-3">
               <label>Advert Type</label>
               <select className="proptype form-control" name="advert_type" id="advertType" defaultValue={advertType} onChange={(e) => setAdvertType(e.target.value)}>
                 <option value="">Select...</option>
                 {typeOptionList(lists.advertType)}
               </select>
             </div>
-            <div className="form-group col-md-2">
+            <div className="form-group col-md-3">
               <label>Property Type</label>
               <select id="propertyType" className="proptype form-control" defaultValue={propertyType} onChange={(e) => setPropertyType(e.target.value)}>
                 <option value="">Select...</option>
                 {typeOptionList(lists.propertyType)}
               </select>
             </div>
-            <div className="form-group col-md-2">
+            <div className="form-group col-md-3">
               <label>Asking Price</label>
               <input type="number" name="askingPrice" id="askingPrice" className="form-control"/>
             </div>
-            <div className="form-group col-md-2">
+            <div className="form-group col-md-3">
               <label>Rates / Taxes</label>
               <input type="number" name="ratesTaxes" id="ratesTaxes" className="form-control"/>
             </div>
           </div>
           <hr/>
+
+
           <div className="row ">
             {stats.Count.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
-                  <div className="col-md-2" key={stat}>
+                  <div className="col-xs-6 col-sm-4 col-md-4 col-6" key={stat}>
                     <div className="form-group input-group-sm">
                       <label>{lbl}</label>
                       <input type="number" className="form-control "
@@ -229,7 +249,7 @@ function NewAd() {
             {stats.Has.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
-                  <div className="col-md-2" key={stat}>
+                  <div className="col-xs-6 col-sm-4 col-md-4 col-6" key={stat}>
                     <div className="form-group form-check-inline">
                       <label className="form-check-label">
                         <input type="checkbox" className="form-check-input" id={`stat.has.${stat}`} data-stat="has"/>
@@ -244,7 +264,7 @@ function NewAd() {
             {stats.Size.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
-                  <div className="col-md-3" key={stat}>
+                  <div className="col-xs-6 col-sm-4 col-md-4 col-6" key={stat}>
                     <label>{lbl}</label>
                     <div className="input-group input-group-sm">
                       <input type="number" className="form-control " placeholder={lbl} id={`stat.size.${stat}`} data-stat="size"/>
@@ -313,6 +333,22 @@ function NewAd() {
             </div>
           </div>
           <hr/>
+          [Image Drop Zone]
+          <input type="file" name="image" id="image" onChange={(e) => uploadFile(e, tmpid, gallery, setGallery)}/>
+          <hr/>
+          <div className="row">
+          {
+            gallery.map((img, i) => {
+              return (
+                  <div className='col-md-3' style={{marginTop: '10px'}} key={i}>
+                    <img src={img.url} className='img-thumbnail'/>
+                    <small className='badge badge-pill badge-danger'>remove</small>
+                  </div>);
+            })
+          }
+          </div>
+          <hr/>
+
           <button className="btn btn-primary form-control">Post Advert</button>
         </form>
       </section>

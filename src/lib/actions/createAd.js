@@ -1,15 +1,27 @@
 import endpoint from './endpoint';
-import Cookies from 'universal-cookie';
+import endpointLocal from './endpointLocal';
 
-const cookies = new Cookies();
 
 async function CreateAd(params) {
-  const token = cookies.get('token');
-  const res = await endpoint.post('/advert/create', params,{
+  const res = await endpoint.post('/advert/create', params);
+/*,{
     headers:{
       Authorization: `Bearer ${token}`
     }
-  });
+  }
+* */
+
+  if(res.data?.pk){
+    console.log("WROTE INTO DYNAMO");
+
+    const res = await endpointLocal.post('/advert/indexAdvert', params, {
+      // withCredentials: true,
+    });
+
+    console.log(res);
+
+  }
+
   return res.data;
 }
 
