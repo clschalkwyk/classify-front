@@ -334,7 +334,11 @@ function NewAd() {
           </div>
           <hr/>
           [Image Drop Zone]
-          <input type="file" name="image" id="image" onChange={(e) => uploadFile(e, tmpid, gallery, setGallery)}/>
+          <input type="file" name="image" id="image" onChange={
+            (e) => {
+                   uploadFile(e, tmpid, gallery, setGallery);
+            }
+          }/>
           <hr/>
           <div className="row">
           {
