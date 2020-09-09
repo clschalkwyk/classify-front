@@ -27,28 +27,22 @@ async function uploadFile(event, tmpId, gal, setgal) {
       // request.setRequestHeader('Authorization', `Bearer ${getToken()}`);
       // request.send(formdata);
 
-      const axiosApi = Axios.create({
-        baseURL: process.env.REACT_APP_SERVICE_ENDPOINT,
-        headers: {
-          'content-type': 'multipart/form-data',
-          'Authorization': `Bearer ${getToken()}`,
-        }
-      });
+      // const axiosApi = Axios.create({
+      //   baseURL: process.env.REACT_APP_SERVICE_ENDPOINT,
+      //   headers: {
+      //     'Authorization': `Bearer ${getToken()}`,
+      //   }
+      // });
 
       const res = await axiosApi.post(`advert/addImage/${tmpId}`, formdata);
       console.log("RESS", res);
+
+      setgal([...gal, {url: res.data.result}])
     }
 
     reader.readAsDataURL(selectedFile);
 
-
-
-
   }
-
-  setgal([...gal, {url: 'https://picsum.photos/id/237/300/200'}]);
-
-
 }
 
 export default uploadFile;

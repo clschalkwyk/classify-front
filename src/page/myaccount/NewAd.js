@@ -104,16 +104,20 @@ function NewAd() {
   const [tmpid, setTmpid] = useState('');
   const [gallery, setGallery] = useState([
     {url: 'https://picsum.photos/seed/picsum/300/200'},
+    {url: 'https://classify-api-dev-attachmentsbucket-hyqj0x8gcafv.s3.af-south-1.amazonaws.com/temp/12b2ad78-3e32-4450-aa02-b332000bda20/46cce16c-19d8-48a1-b25a-b749f965ca27.jpeg'},
   ]);
 
   useEffect(() => {
     if (!localStorage.getItem('tmpId')) {
       localStorage.setItem('tmpId', uuid4());
     }
-
     setTmpid(localStorage.getItem('tmpId'));
-
   }, []);
+
+  // useEffect(() => {
+  //   console.log(gallery);
+  // },[gallery]);
+
   //setTmpid(localStorage.getItem('tmpId'));
 
   const recalcTitle = () => {
