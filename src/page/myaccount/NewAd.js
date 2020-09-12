@@ -3,6 +3,9 @@ import genPayload from '../../lib/myaccount/genpayload';
 import CreateAd from '../../lib/actions/createAd';
 import {v4 as uuid4} from 'uuid';
 import uploadFile from '../../lib/actions/uploadFile';
+import './NewAd.css';
+import axiosApi from '../../lib/actions/endpoint';
+import deleteFile from '../../lib/actions/deleteFile';
 
 function NewAd() {
 
@@ -102,18 +105,49 @@ function NewAd() {
   const [propTitle, setProptitle] = useState('');
   const [advertType, setAdvertType] = useState('');
   const [tmpid, setTmpid] = useState('');
-  const [gallery, setGallery] = useState([
-    {url: 'https://picsum.photos/seed/picsum/300/200'},
-    {url: 'https://classify-api-dev-attachmentsbucket-hyqj0x8gcafv.s3.af-south-1.amazonaws.com/temp/12b2ad78-3e32-4450-aa02-b332000bda20/46cce16c-19d8-48a1-b25a-b749f965ca27.jpeg'},
-  ]);
+  const [gallery, setGallery] = useState([]);
+
+  const reloadGallery = () => {
+
+    (async () => {
+      if (localStorage.getItem('tmpId')) {
+        const res = await axiosApi.get(`advert/images/temp/${localStorage.getItem('tmpId')}`);
+        if (res.data?.result) {
+          let galleryUpdate = Array(res.data.result.length);
+          res.data.result.map((it) => {
+            galleryUpdate[parseInt(it.position)] = it;
+          });
+          setGallery(galleryUpdate);
+
+          console.log('updated gallery');
+        }
+      }
+    })();
+  };
 
   useEffect(() => {
     if (!localStorage.getItem('tmpId')) {
       localStorage.setItem('tmpId', uuid4());
     }
     setTmpid(localStorage.getItem('tmpId'));
+    reloadGallery();
   }, []);
 
+  let galleryDisplay;
+  useEffect(() => {
+    if (!localStorage.getItem('tmpId')) {
+      localStorage.setItem('tmpId', uuid4());
+    }
+    setTmpid(localStorage.getItem('tmpId'));
+    console.log("redraw gallery");
+
+
+  }, [gallery]);
+
+  let imagePos = 0;
+  if (gallery.length === 0) {
+
+  }
   // useEffect(() => {
   //   console.log(gallery);
   // },[gallery]);
@@ -200,8 +234,6 @@ function NewAd() {
             </div>
           </div>
           <hr/>
-
-
           <div className="form-row justify-content-center ">
             <div className="form-group col-md-3">
               <label>Advert Type</label>
@@ -227,9 +259,7 @@ function NewAd() {
             </div>
           </div>
           <hr/>
-
-
-          <div className="row ">
+          <div className="row ad-stats">
             {stats.Count.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
@@ -249,7 +279,7 @@ function NewAd() {
           </div>
           <hr/>
           <small>Select only applicable options.</small>
-          <div className="row ">
+          <div className="row ad-stats">
             {stats.Has.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
@@ -337,23 +367,33 @@ function NewAd() {
             </div>
           </div>
           <hr/>
-          [Image Drop Zone]
+          <small>Select an image below to upload</small><br/>
           <input type="file" name="image" id="image" onChange={
             (e) => {
-                   uploadFile(e, tmpid, gallery, setGallery);
+              uploadFile(e, tmpid, gallery, setGallery, gallery.length + 1);
             }
           }/>
           <hr/>
           <div className="row">
-          {
-            gallery.map((img, i) => {
-              return (
-                  <div className='col-md-3' style={{marginTop: '10px'}} key={i}>
-                    <img src={img.url} className='img-thumbnail'/>
-                    <small className='badge badge-pill badge-danger'>remove</small>
-                  </div>);
-            })
-          }
+            {
+              gallery && gallery.map((img, i) => {
+                if (img?.url) {
+                  return (
+                      <div className='col-md-3 gallery' style={{marginTop: '10px'}} key={i} id={`IMG-${img.pk}`}>
+                        <img src={img?.url}/>
+                        <small className='badge badge-pill badge-danger' onClick={
+                          (e) => {
+                            if (window.confirm("Are you sure?")) {
+                              console.log("remove: ", img?.pk);
+                              const r = deleteFile(tmpid, img.pk);
+                              console.log("Deleted : ", r);
+                              document.getElementById(`IMG-${img.pk}`).remove();
+                            }
+                          }}>remove</small>
+                      </div>);
+                }
+              })
+            }
           </div>
           <hr/>
 

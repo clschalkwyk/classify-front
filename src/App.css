@@ -42,18 +42,15 @@
   padding:10px;
 }
 
-.propstats textarea{
-  font-size: 12px;
-}
 
 .propstats label{
   text-transform: capitalize;
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Arial', serif;
 }
 
 .propstats input[type=text], .propstats input[type=number], .propstats select{
-  font-size: 12px;
+  font-size: 14px;
   font-family: 'Arial', serif;
 }
 

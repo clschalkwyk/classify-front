@@ -3,6 +3,7 @@ import {hasToken, getToken} from '../token';
 
 let axiosApi;
 if(hasToken()){
+  console.log("AUTHED AXIOS");
    axiosApi = Axios.create({
     baseURL: process.env.REACT_APP_SERVICE_ENDPOINT,
     headers: {
@@ -11,6 +12,7 @@ if(hasToken()){
     }
   });
 }else{
+  console.log("UNAUTHED AXIOS");
    axiosApi = Axios.create({
     baseURL: process.env.REACT_APP_SERVICE_ENDPOINT,
     headers: {
