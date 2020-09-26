@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
+import './NewAd.css';
+import {v4 as uuid4} from 'uuid';
+import axiosApi from '../../lib/actions/endpoint';
 import genPayload from '../../lib/myaccount/genpayload';
 import CreateAd from '../../lib/actions/createAd';
-import {v4 as uuid4} from 'uuid';
 import uploadFile from '../../lib/actions/uploadFile';
-import './NewAd.css';
-import axiosApi from '../../lib/actions/endpoint';
 import deleteFile from '../../lib/actions/deleteFile';
 
 function NewAd() {

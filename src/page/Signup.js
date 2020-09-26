@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './Signup.css';
-import signupAction from '../lib/actions/signup';
+import signupAction from '../lib/actions/auth/signup';
 
 function Signup(){
 

@@ -1,4 +1,4 @@
-import endpoint from './endpoint';
+import endpoint from '../../endpoints/auth';
 
 async function Signup(params) {
   const res = await endpoint.post('/auth/signup', params);

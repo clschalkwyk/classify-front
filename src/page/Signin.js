@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import signinAction from '../lib/actions/signin';
+import signinAction from '../lib/actions/auth/signin';
 import {useCookies} from 'react-cookie';
 
 function Signin(){
