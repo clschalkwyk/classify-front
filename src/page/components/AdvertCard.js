@@ -4,29 +4,35 @@ function AdvertCard(props) {
 
   const {item} = props;
 
-  const getStat = (st) => {
-    if(item.stat?.count) {
-      return (item.stat.count.filter((it) => {
-        return it.attrib === st
-      })).map((i) => {
-        return i.val
-      }).pop()
-    }
-  };
-  const beds = getStat('bedrooms');
-  const baths = getStat('bathrooms');
-  const garage = getStat('garages');
+  let bedrooms;
+  try{
+    bedrooms =  item.stat.count.filter((e) => Object.keys(e)[0] === 'bedrooms').pop()['bedrooms'];
+    }catch(e){ }
+
+  let bathrooms;
+  try{
+    bathrooms =  item.stat.count.filter((e) => Object.keys(e)[0] === 'bathrooms').pop()['bathrooms'];
+    }catch(e){ }
+
+  let garages;
+  try{
+    garages =  item.stat.count.filter((e) => Object.keys(e)[0] === 'garages').pop()['garages'];
+    }catch(e){ }
+
+  const beds = bedrooms;
+  const baths = bathrooms;
+  const garage = garages;
   const {askingPrice} = item;
 
 
   return (
-      <div className="col-sm-6 col-md-6 col-lg-4 ad-box clickable" style={{marginTop: '10px'}} >
+      <div className="col-sm-6 col-md-6 col-lg-3 ad-box clickable" style={{padding: '10px'}} >
         <a href={`/property/view/${item.pk}`}>
         <img src="http://lorempixel.com/540/260/city/" className="card-img-bottom" alt={item.title} />
         <div className="info-box">
           <div className="row">
               <div className="col-xs-12">
-                <h2>{item.title}</h2>
+                <h2>{item.title}, <strong>{item.address.province}</strong></h2>
               </div>
           </div>
           <div className="row">

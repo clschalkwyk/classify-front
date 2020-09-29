@@ -17,22 +17,28 @@ function  App() {
   return (
     <Router>
       <Navigation/>
-      <div className='container' style={{padding: "10px"}}>
+
       <Switch>
         {
           hasToken() &&
           ( <Route path='/my-account'>
+            <div className='container' style={{padding: "10px"}}>
               <MyAccount/>
+            </div>
             </Route>)
         }
          <Route path='/for-sale'>
             <Forsale/>
           </Route>
         <Route path='/join'>
-          <Signup/>
+          <div className='container' style={{padding: "10px"}}>
+            <Signup/>
+          </div>
         </Route>
         <Route path='/signin'>
-          <Signin/>
+          <div className='container' style={{padding: "10px"}}>
+            <Signin/>
+          </div>
         </Route>
         <Route path='/property/view/:urlkey'>
           <View />
@@ -44,7 +50,7 @@ function  App() {
           <Home/>
         </Route>
       </Switch>
-      </div>
+
       <Footer/>
     </Router>
   );
