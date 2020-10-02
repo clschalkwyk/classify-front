@@ -6,6 +6,7 @@ import genPayload from '../../lib/myaccount/genpayload';
 import CreateAd from '../../lib/actions/createAd';
 import uploadFile from '../../lib/actions/uploadFile';
 import deleteFile from '../../lib/actions/deleteFile';
+import theLists from '../../config/lists';
 
 function NewAd() {
 
@@ -77,20 +78,21 @@ function NewAd() {
     ],
   };
 
-  const lists = {
-    'propertyType': ['House', 'Apartment', 'Townhouse', 'Plot', 'Farm', 'Commercial Building', 'Industrial'],
-    'advertType': ['For Sale', 'To Rent'],
-    'province': [
-      'Eeastern  Cape',
-      'Free State',
-      'Kwazulu-Natal',
-      'Gauteng',
-      'Limpopo',
-      'Mpumalanga',
-      'North-West',
-      'Western Cape',
-    ],
-  };
+
+  // const lists = {
+  //   'propertyType': ['House', 'Apartment', 'Townhouse', 'Plot', 'Farm', 'Commercial Building', 'Industrial'],
+  //   'advertType': ['For Sale', 'To Rent'],
+  //   'province': [
+  //     'Eeastern  Cape',
+  //     'Free State',
+  //     'Kwazulu-Natal',
+  //     'Gauteng',
+  //     'Limpopo',
+  //     'Mpumalanga',
+  //     'North-West',
+  //     'Western Cape',
+  //   ],
+  // };
 
   const typeOptionList = (typeList) => {
     return typeList.map(lst => {
@@ -239,14 +241,14 @@ function NewAd() {
               <label>Advert Type</label>
               <select className="proptype form-control" name="advert_type" id="advertType" defaultValue={advertType} onChange={(e) => setAdvertType(e.target.value)}>
                 <option value="">Select...</option>
-                {typeOptionList(lists.advertType)}
+                {typeOptionList(theLists.advertType)}
               </select>
             </div>
             <div className="form-group col-md-3">
               <label>Property Type</label>
               <select id="propertyType" className="proptype form-control" defaultValue={propertyType} onChange={(e) => setPropertyType(e.target.value)}>
                 <option value="">Select...</option>
-                {typeOptionList(lists.propertyType)}
+                {typeOptionList(theLists.propertyType)}
               </select>
             </div>
             <div className="form-group col-md-3">
@@ -350,7 +352,7 @@ function NewAd() {
               <select id="province" name="province" className="form-control" style={{textTransform: 'capitalize'}}
                       onChange={(e) => setProvince(e.target.value)} defaultValue={province}>
                 <option defaultValue={province}>Select...</option>
-                {lists.province.map((lst) => {
+                {theLists.province.map((lst) => {
 
                   return (
                       <option value={lst} key={lst}>{lst.replace('_', ' ')}</option>

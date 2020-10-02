@@ -4,6 +4,7 @@ import esPoint from '../../lib/actions/espoint';
 import getStat from '../../lib/stat';
 import ContactForm from './ContactForm';
 import GoogleMapReact from 'google-map-react';
+import {getAdvert} from '../../lib/actions/feed';
 
 const MapMarker = ({text}) => <div className='pin'>{text}</div>;
 
@@ -19,16 +20,17 @@ function View() {
 
   useEffect(() => {
     (async () => {
-      setAdv((await esPoint.get(`/getPropAd?id=${urlkey}`)).data);
+      setAdv((await getAdvert(urlkey)));
     })();
   }, [urlkey]);
 
+  console.log(adv);
 
   const statGarages = getStat(adv,'garages');
   const statBedrooms = getStat(adv,'bedrooms');
   const statBathrooms = getStat(adv,'bathrooms');
   return (
-      <>
+      <div className='container'>
         {adv &&
         <>
           <div className='row'>
@@ -58,9 +60,7 @@ function View() {
                   <>
                     <span className='badge badge-secondary'> {statGarages} <i className="fa fa-car"/> </span>
                   </>
-
                 }
-
               </h5>
             </div>
           </div>
@@ -74,14 +74,24 @@ function View() {
                 </div>
                 <div className='row-md-6 row-xs-12'>
                 <ul style={{listStyle: 'none', textTransform: 'capitalize'}}>
-                  {adv.stat?.count?.map((i,v) => <li key={v}>{i.val} {i.attrib.replace('_', ' ')} </li>)}
+                  {adv.stat?.count?.map((v) => {
+                    const keys = Object.keys(v);
+                    return <li key={keys[0]}>{v[keys[0]]} {keys[0].replace('_', ' ')} </li>
+
+                  })}
                   <li>&nbsp;</li>
-                  {adv.stat?.size?.map((i,v) => <li key={v}>{i.attrib.replace('_', ' ')} {i.val} <sup>2</sup>m</li>)}
+                  {adv.stat?.size?.map((v) => {
+                    const k = Object.keys(v);
+                    return <li key={k[0]}>{k[0].replace('_', ' ')} {v[k[0]]} <sup>2</sup>m</li>
+                  })}
                 </ul>
                 </div>
                 <div className='row-md-6 row-xs-12'>
                 <ul style={{listStyle: 'none', textTransform: 'capitalize'}}>
-                  {adv.stat?.has?.map((i,v) => <li key={v}>{i.attrib.replace('_', ' ')} {i.val} <i className='fa fa-check'/></li>)}
+                  {adv.stat?.has?.map((v) => {
+                    const k = Object.keys(v);
+                    return <li key={k[0]}>{k[0].replace('_', ' ')} {v[k[0]]} <i className='fa fa-check'/></li>
+                  })}
                 </ul>
                 </div>
             </div>
@@ -99,7 +109,7 @@ function View() {
           <ContactForm id={adv.pk} />
         </>
         }
-      </>
+      </div>
   );
 }
 
