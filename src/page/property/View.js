@@ -16,15 +16,16 @@ function View() {
   //let {province} = useParams();
   const [adv, setAdv] = useState({});
   const [center, setCenter] = useState({lat: -33.9188, lng: 18.4233});
-  const [zoom, setZoom] = useState(13);
+  const [zoom, setZoom] = useState(15);
 
   useEffect(() => {
     (async () => {
       setAdv((await getAdvert(urlkey)));
+      if(adv.geo) {
+        setCenter({lat: adv.geo[Object.keys(adv.geo)[1]], lng: adv.geo[Object.keys(adv.geo)[0]]})
+      }
     })();
-  }, [urlkey]);
-
-  console.log(adv);
+  }, [urlkey, center]);
 
   const statGarages = getStat(adv,'garages');
   const statBedrooms = getStat(adv,'bedrooms');
@@ -97,13 +98,19 @@ function View() {
             </div>
           </div>
           <div style={{height: '50vh', width: '100%'}}>
-            <GoogleMapReact
-                bootstrapURLKeys={{key: MAP_KEY}}
-                defaultCenter={center}
-                defaultZoom={zoom}
-            >
-              <MapMarker lat={-33.91} lng={18.42} text=""></MapMarker>
-            </GoogleMapReact>
+
+              {
+                adv.geo &&
+                <GoogleMapReact
+                    bootstrapURLKeys={{key: MAP_KEY}}
+                    defaultCenter={{lat: adv.geo[Object.keys(adv.geo)[1]], lng: adv.geo[Object.keys(adv.geo)[0]]}}
+                    defaultZoom={zoom}
+                >
+                  <MapMarker lat={adv.geo[Object.keys(adv.geo)[1]]} lng={adv.geo[Object.keys(adv.geo)[0]]} text=""></MapMarker>
+                </GoogleMapReact>
+              }
+
+
           </div>
           <hr/>
           <ContactForm id={adv.pk} />
