@@ -141,20 +141,9 @@ function NewAd() {
       localStorage.setItem('tmpId', uuid4());
     }
     setTmpid(localStorage.getItem('tmpId'));
-    console.log("redraw gallery");
-
-
   }, [gallery]);
 
   let imagePos = 0;
-  if (gallery.length === 0) {
-
-  }
-  // useEffect(() => {
-  //   console.log(gallery);
-  // },[gallery]);
-
-  //setTmpid(localStorage.getItem('tmpId'));
 
   const recalcTitle = () => {
     if (propertyType !== '') {
@@ -215,9 +204,12 @@ function NewAd() {
     let pload = genPayload();
     pload['title'] = propTitle;
 
-    console.log('Payload: ', JSON.stringify(pload));
     const res = await CreateAd(pload);
-    console.log(res);
+    if (res.pk){
+      localStorage.removeItem('tmpId');
+      window.location.href = '/my-account';
+    }
+
   }
 
   return (
