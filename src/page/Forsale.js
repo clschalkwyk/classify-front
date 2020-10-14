@@ -7,11 +7,9 @@ function Forsale() {
 
   useEffect(() => {
     (async () => {
-      const list = await listByPropTypeAdType('', '');
+      const list = await listByPropTypeAdType('', 'For Sale');
       setAds(list);
-
     })();
-
   }, []);
 
   return (
