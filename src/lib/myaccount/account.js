@@ -18,11 +18,22 @@ export async function updateProfile(param){
 }
 
 export async function validToken() {
-  const res = await axiosApi.get('/auth/profile');
-
-  if (res) {
-    return (res.id !== '' && res.email !== '');
+  try {
+    const res = await axiosApi.get('/auth/profile');
+    if (res) {
+      if(res.id !== '' && res.email !== ''){
+        return {
+          "result": true,
+          "message": "Welcome!"
+        };
+      }
+    }
+  }catch(error){
+    if(error.response.status === 401){
+      return {
+        "result": false,
+        "message": "Unauthorized"
+      };
+    }
   }
-
-  return false;
 }

@@ -46,37 +46,7 @@ function NewAd() {
     },
   };
 
-  const stats = {
-    'Count': [
-      'bedrooms',
-      'bathrooms',
-      'lounges',
-      'kitchen',
-      'garage',
-      'parking_bays',
-    ],
-    'Has': [
-      'pool',
-      'patio',
-      'storage',
-      'laundry',
-      'scullery',
-      'guest_toilet',
-      'entrance_hall',
-      'alarm',
-      'access_gate',
-      'electric_fencing',
-      'intercom',
-      'guard_house',
-      'pet_friendly',
-      'sea_view',
-      'flatlet',
-    ],
-    'Size': [
-      'erf_size',
-      'floor_area',
-    ],
-  };
+
 
 
   // const lists = {
@@ -135,15 +105,12 @@ function NewAd() {
     reloadGallery();
   }, []);
 
-  let galleryDisplay;
   useEffect(() => {
     if (!localStorage.getItem('tmpId')) {
       localStorage.setItem('tmpId', uuid4());
     }
     setTmpid(localStorage.getItem('tmpId'));
   }, [gallery]);
-
-  let imagePos = 0;
 
   const recalcTitle = () => {
     if (propertyType !== '') {
@@ -254,7 +221,7 @@ function NewAd() {
           </div>
           <hr/>
           <div className="row ad-stats">
-            {stats.Count.map(stat => {
+            {theLists.stats.Count.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
                   <div className="col-xs-6 col-sm-4 col-md-4 col-6" key={stat}>
@@ -274,7 +241,7 @@ function NewAd() {
           <hr/>
           <small>Select only applicable options.</small>
           <div className="row ad-stats">
-            {stats.Has.map(stat => {
+            {theLists.stats.Has.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
                   <div className="col-xs-6 col-sm-4 col-md-4 col-6" key={stat}>
@@ -289,7 +256,7 @@ function NewAd() {
           </div>
           <hr/>
           <div className="row ">
-            {stats.Size.map(stat => {
+            {theLists.stats.Size.map(stat => {
               const lbl = stat.replace('_', ' ');
               return (
                   <div className="col-xs-6 col-sm-4 col-md-4 col-6" key={stat}>
@@ -374,13 +341,11 @@ function NewAd() {
                 if (img?.url) {
                   return (
                       <div className='col-md-3 gallery' style={{marginTop: '10px'}} key={i} id={`IMG-${img.pk}`}>
-                        <img src={img?.url}/>
+                        <img src={img?.url} alt="Advert"/>
                         <small className='badge badge-pill badge-danger' onClick={
                           (e) => {
                             if (window.confirm("Are you sure?")) {
-                              console.log("remove: ", img?.pk);
-                              const r = deleteFile(tmpid, img.pk);
-                              console.log("Deleted : ", r);
+                              deleteFile(tmpid, img.pk);
                               document.getElementById(`IMG-${img.pk}`).remove();
                             }
                           }}>remove</small>
@@ -390,7 +355,6 @@ function NewAd() {
             }
           </div>
           <hr/>
-
           <button className="btn btn-primary form-control">Post Advert</button>
         </form>
       </section>

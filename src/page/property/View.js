@@ -5,8 +5,19 @@ import ContactForm from './ContactForm';
 import GoogleMapReact from 'google-map-react';
 import {getAdvert} from '../../lib/actions/feed';
 import Slider from 'react-slick';
+import './View.scss';
 
 const MapMarker = ({text}) => <div className='pin'>{text}</div>;
+
+function CustomSlide(props){
+  const {url, title, cls} = props;
+
+  return (
+    <div>
+      <img src={url} className={cls} alt={title}/>
+    </div>
+  );
+}
 
 function View() {
   const MAP_KEY = 'AIzaSyAc_llDV6vAELqGORE0uH5D11UFUNMTKOU';
@@ -15,16 +26,17 @@ function View() {
   //let {province} = useParams();
   const [adv, setAdv] = useState({});
   const [center, setCenter] = useState({lat: -33.9188, lng: 18.4233});
-  const [zoom, setZoom] = useState(15);
+  const [zoom, ] = useState(15);
 
   useEffect(() => {
     (async () => {
       setAdv((await getAdvert(urlkey)));
-      if (adv.geo?.let) {
-        setCenter({lat: adv.geo[Object.keys(adv.geo)[1]], lng: adv.geo[Object.keys(adv.geo)[0]]});
-      }
     })();
   }, [urlkey, center]);
+
+  if (adv.geo?.let) {
+    setCenter({lat: adv.geo[Object.keys(adv.geo)[1]], lng: adv.geo[Object.keys(adv.geo)[0]]});
+  }
 
   const statGarages = getStat(adv, 'garages');
   const statBedrooms = getStat(adv, 'bedrooms');
@@ -35,11 +47,7 @@ function View() {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-    autoPlay: true,
-    autoplaySpeed: 1000,
-
+    slidesToScroll: 1
   };
 
   return (
@@ -49,42 +57,43 @@ function View() {
           <div className='row'>
             <div className='col-sm-12'>
               <h3>{adv.title}</h3>
-              <small style={{fontSize: '12px', fontWeight: 'bold'}}>{adv.address?.province} > {adv.address?.city} > {adv.address?.suburb}</small><br/>
-
-
+              <small className='ad-breadcrum'>{adv.address?.province} > {adv.address?.city} > {adv.address?.suburb}</small><br/>
+              <div>
               <Slider {...settings}>
                 {
                   adv.images && (
                       adv.images.map((img, i) => {
                         return (
-                            <div key={i}>
-                              <img src={img.url} className="card-img-bottom card-img-top" alt={adv.title} style={{maxHeight: '400px'}}/>
-                            </div>
+                          <CustomSlide url={img.url} tile={adv.title}/>
                         );
                       })
                   )
                 }
+                <div className='viewImage'>
+                  <img src='https://picsum.photos/799/460?grayscale' className="" alt={adv.title}/>
+                </div>
+                <div className='viewImage'>
+                  <img src='https://picsum.photos/799/460?grayscale' className="" alt={adv.title}/>
+                </div>
               </Slider>
-
+              </div>
             </div>
           </div>
           <div className='row adstats'>
             <div className="col-sm-12">
               <h5>
                 R {new Intl.NumberFormat('en-ZA', {maximumSignificantDigits: 3}).format(adv.askingPrice)}<br/>
-                {
-                  statBedrooms &&
+                {statBedrooms &&
                   <>
                     <span className='badge badge-secondary'>   {statBedrooms} <i className="fa fa-bed"/></span>
                   </>
                 }
                 {statBathrooms &&
-                <>
+                  <>
                   <span className='badge badge-secondary'> {statBathrooms} <i className="fa fa-bath"/> </span>
-                </>
+                  </>
                 }
-                {
-                  statGarages &&
+                {statGarages &&
                   <>
                     <span className='badge badge-secondary'> {statGarages} <i className="fa fa-car"/> </span>
                   </>
@@ -97,50 +106,48 @@ function View() {
               <span dangerouslySetInnerHTML={{__html: adv.description}}></span>
             </div>
             <div className='col-xs-12 col-sm-4 offset-md-1 row' style={{fontSize: '13px', borderTop: '1px solid #000000'}}>
-              <div className='col-md-12'>
-                <h5>Technical Details</h5>
-              </div>
-              <div className='row-md-6 row-xs-12'>
-                <ul style={{listStyle: 'none', textTransform: 'capitalize'}}>
-                  {
-                    (() => {
-                      if (adv.stat?.count) {
-                        return adv.stat.count.map((k, i) => {
-                          const keyname = Object.keys(k)[0];
-                          const val = k[keyname];
-                          return <li key={i}>{val} {keyname.replace('_', ' ')} </li>;
-                        });
-                      }
-                    })()
-                  }
-                  <li>&nbsp;</li>
-                  {
-                    (() => {
-                      if (adv.stat?.size) {
-                        return adv.stat.size.map((k) => {
-                          const keyname = Object.keys(k)[0];
-                          const val = k[keyname];
-                          return <li>{keyname.replace('_', ' ')} {val}</li>;
-                        });
-                      }
-                    })()
-                  }
-                </ul>
-              </div>
-              <div className='row-md-6 row-xs-12'>
-                <ul style={{listStyle: 'none', textTransform: 'capitalize'}}>
-                  {
-                    (() => {
-                      if (adv.stat?.size) {
-                        return adv.stat.has.map((k) => {
-                          const keyname = Object.keys(k)[0];
-                          const val = k[keyname];
-                          return <li>{val} {keyname.replace('_', ' ')} <i className='fa fa-check'/></li>;
-                        });
-                      }
-                    })()
-                  }
-                </ul>
+              <div className='row ad-stats'>
+                <div className=''>
+                  <ul style={{listStyle: 'none', textTransform: 'capitalize'}}>
+                    {
+                      (() => {
+                        if (adv.stat?.count) {
+                          return adv.stat.count.map((k, i) => {
+                            const keyname = Object.keys(k)[0];
+                            const val = k[keyname];
+                            return <li key={i}><span className={'badge badge-info stats-badge'}>{val}</span> {keyname.replace('_', ' ')} </li>;
+                          });
+                        }
+                      })()
+                    }
+                    {
+                      (() => {
+                        if (adv.stat?.size) {
+                          return adv.stat.size.map((k, i) => {
+                            const keyname = Object.keys(k)[0];
+                            const val = k[keyname];
+                            return <li key={`size-${i}`}>{keyname.replace('_', ' ')} {val}</li>;
+                          });
+                        }
+                      })()
+                    }
+                  </ul>
+                </div>
+                <div className=''>
+                  <ul style={{listStyle: 'none', textTransform: 'capitalize'}}>
+                    {
+                      (() => {
+                        if (adv.stat?.size) {
+                          return adv.stat.has.map((k, i) => {
+                            const keyname = Object.keys(k)[0];
+                            const val = k[keyname];
+                            return <li key={`has-${i}`}>{val} {keyname.replace('_', ' ')} <i className='fa fa-check'/></li>;
+                          });
+                        }
+                      })()
+                    }
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -157,7 +164,7 @@ function View() {
             </div>
           }
           <hr/>
-          <ContactForm id={adv.pk}/>
+          {/*<ContactForm id={adv.pk}/>*/}
         </>
         }
       </div>
